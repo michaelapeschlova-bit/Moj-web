@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michaela Peschlová</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --nude: #EDE8E0;
+    --nude-dark: #D6CFC4;
+    --rose: #C9A99A;
+    --rose-light: #E8D5CE;
+    --blue: #7A96A8;
+    --blue-dark: #4A6878;
+    --gray: #8A8880;
+    --gray-light: #F5F3EF;
+    --charcoal: #2C2A28;
+    --white: #FDFCFA;
+    --black: #1A1916;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--charcoal);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(253, 252, 250, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--nude-dark);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--charcoal); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 6rem 4rem 4rem;
+    gap: 4rem;
+    background: var(--white);
+  }
+
+  .hero-text { max-width: 540px; }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero-bio {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 460px;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 2rem;
+    background: var(--charcoal);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .hero-cta:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+  }
+
+  .hero-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 2rem;
+    border: 1px solid var(--nude-dark);
+    color: var(--charcoal);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s;
+    margin-left: 1rem;
+  }
+
+  .hero-cta-secondary:hover {
+    background: var(--nude);
+    border-color: var(--rose);
+  }
+
+  .hero-image-wrap {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .hero-image-bg {
+    position: absolute;
+    top: 10%;
+    right: -2rem;
+    width: 80%;
+    height: 85%;
+    background: var(--nude);
+    z-index: 0;
+  }
+
+  .hero-image {
+    position: relative;
+    z-index: 1;
+    width: 72%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(15%);
+  }
+
+  .hero-tag {
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    z-index: 2;
+    background: var(--white);
+    border: 1px solid var(--nude-dark);
+    padding: 1rem 1.5rem;
+    font-size: 0.75rem;
+  }
+
+  .hero-tag span {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--rose);
+    line-height: 1.2;
+  }
+
+  /* SECTION SHARED */
+  section {
+    padding: 6rem 4rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--black);
+    line-height: 1.15;
+    margin-bottom: 3rem;
+  }
+
+  /* O MNE */
+  .about {
+    background: var(--gray-light);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-aside { padding-top: 0.5rem; }
+
+  .about-detail {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--nude-dark);
+  }
+
+  .about-detail:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .about-detail-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 0.4rem;
+  }
+
+  .about-detail-value {
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    font-weight: 400;
+  }
+
+  .about-text {
+    font-size: 1.05rem;
+    color: var(--gray);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text strong {
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+
+  /* ČO PONÚKAM */
+  .offer {
+    background: var(--white);
+  }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--nude-dark);
+    border: 1px solid var(--nude-dark);
+    margin-top: 1rem;
+  }
+
+  .offer-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+  }
+
+  .offer-card:hover { background: var(--gray-light); }
+
+  .offer-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--nude-dark);
+    line-height: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .offer-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .offer-desc {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .offer-usp {
+    margin-top: 4rem;
+    padding: 2.5rem 3rem;
+    background: var(--charcoal);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .offer-usp-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    flex: 1;
+    color: var(--nude);
+  }
+
+  .offer-usp-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 200px;
+  }
+
+  .offer-usp-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rose-light);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* SKÚSENOSTI */
+  .skills {
+    background: var(--gray-light);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .skills-col-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--nude-dark);
+  }
+
+  .exp-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--nude-dark);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.4rem;
+  }
+
+  .exp-role {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+
+  .exp-period {
+    font-size: 0.75rem;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    margin-left: 1rem;
+  }
+
+  .exp-company {
+    font-size: 0.8rem;
+    color: var(--rose);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .exp-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .skill-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--nude-dark);
+    color: var(--charcoal);
+    background: var(--white);
+  }
+
+  .skill-category {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .skill-category:first-child { margin-top: 0; }
+
+  /* KONTAKT */
+  .contact {
+    background: var(--charcoal);
+    color: var(--white);
+    text-align: center;
+    padding: 8rem 4rem;
+  }
+
+  .contact .section-label { color: var(--rose); }
+
+  .contact .section-title {
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--nude);
+    font-weight: 300;
+    margin-bottom: 3rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.875rem 2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--rose);
+    background: rgba(201,169,154,0.1);
+  }
+
+  .contact-link.primary {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: var(--white);
+  }
+
+  .contact-link.primary:hover {
+    background: #b8948a;
+    border-color: #b8948a;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 4rem;
+    background: var(--black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-note {
+    font-size: 0.75rem;
+    color: var(--gray);
+    opacity: 0.6;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+  .hero-name { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+  .hero-bio { animation: fadeUp 0.6s ease both; animation-delay: 0.35s; }
+  .hero-actions { animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
+  .hero-image-wrap { animation: fadeUp 0.8s ease both; animation-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 2rem 3rem; gap: 3rem; }
+    .hero-image-wrap { justify-content: center; }
+    .hero-image { width: 60%; }
+    .hero-image-bg { right: 0; width: 70%; }
+    section { padding: 4rem 2rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .offer-grid { grid-template-columns: 1fr; }
+    .offer-usp { flex-direction: column; gap: 1.5rem; }
+    .skills-grid { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">MP</a>
+  <ul class="nav-links">
+    <li><a href="#o-mne">O mne</a></li>
+    <li><a href="#ponukam">Čo ponúkam</a></li>
+    <li><a href="#skusenosti">Skúsenosti</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Praha · Dostupná na čiastočný úväzok</p>
+    <h1 class="hero-name">Michaela<br><em>Peschlová</em></h1>
+    <p class="hero-bio">
+      Rozkladám veci na súčiastky, hľadám kde to škrípe a vymýšľam, ako to spraviť lepšie. 
+      Keď sa do niečoho zakúsnem, čas prestáva existovať, na obrazovke sa kopí jedno otvorené okno 
+      za druhým a okolie medzitým stíha všetko ostatné. Začínam veci s nadšením. Dokončujem... hej, aj to sa stáva.
+    </p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="hero-cta">Kontaktujte ma</a>
+      <a href="#skusenosti" class="hero-cta-secondary">Skúsenosti</a>
+    </div>
+  </div>
+
+  <div class="hero-image-wrap">
+    <div class="hero-image-bg"></div>
+    <img src="photo.jpg" alt="Michaela Peschlová" class="hero-image" onerror="this.style.background='#C9A99A';this.removeAttribute('src')">
+    <div class="hero-tag">
+      <span>4+</span>
+      roky v medzinárodnom účtovníctve
+    </div>
+  </div>
+</section>
+
+<!-- O MNE -->
+<section class="about" id="o-mne">
+  <div class="about-aside">
+    <p class="section-label">O mne</p>
+    <div class="about-detail">
+      <p class="about-detail-label">Lokalita</p>
+      <p class="about-detail-value">Praha, ČR</p>
+    </div>
+    <div class="about-detail">
+      <p class="about-detail-label">Jazyky</p>
+      <p class="about-detail-value">Slovenčina · Čeština · Angličtina B2</p>
+    </div>
+    <div class="about-detail">
+      <p class="about-detail-label">Dostupnosť</p>
+      <p class="about-detail-value">Čiastočný úväzok · DPČ · DPP · OSVČ</p>
+    </div>
+    <div class="about-detail">
+      <p class="about-detail-label">Forma</p>
+      <p class="about-detail-value">Hybrid · Remote</p>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <h2 class="section-title">Čo ma robí<br>tou, kto som</h2>
+    <p class="about-text">
+      K účtovníctvu som sa dostala trochu po schodoch – na strednej mi to šlo, takže mi to nejako prischlo. 
+      Prvú reálnu príležitosť mi dala externá účtovníčka môjho otca, ktorá ma vzala na prípravu podkladov 
+      a postupne mi zverila celé účtovníctvo. Tak som zistila, že ma baví, keď veci do seba zapadajú – 
+      a keď nezapadajú, <strong>ešte viac ma baví prísť na to prečo.</strong>
+    </p>
+    <p class="about-text">
+      Momentálne som na materskej a skúšam niečo nové – product admin v Košík.cz, kde oceňujú aktívnu 
+      slovenčinu, čo je v Čechách vzácnosť. Neviem ešte čo všetko ma tam čaká, ale to je asi na tom 
+      najzaujímavejšie.
+    </p>
+    <p class="about-text">
+      Čokoľvek robím, robím precízne a naplno. Niekedy až príliš naplno – <strong>ale to už viete z úvodného odstavca.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ČO PONÚKAM -->
+<section class="offer" id="ponukam">
+  <p class="section-label">Čo ponúkam</p>
+  <h2 class="section-title">Oblasti, kde<br>viem pomôcť</h2>
+
+  <div class="offer-grid">
+    <div class="offer-card">
+      <p class="offer-number">01</p>
+      <p class="offer-title">Účtovníctvo & reporting</p>
+      <p class="offer-desc">Reconciliácie, journal entries, intercompany účtovníctvo, month-end close podpora, variance analýza. Presne a bez zbytočných chýb.</p>
+    </div>
+    <div class="offer-card">
+      <p class="offer-number">02</p>
+      <p class="offer-title">Administratíva & dáta</p>
+      <p class="offer-desc">Product admin, správa dát, príprava podkladov, práca s Excelom. Tam, kde treba dôkladnosť a oko pre detail.</p>
+    </div>
+    <div class="offer-card">
+      <p class="offer-number">03</p>
+      <p class="offer-title">Controlling & analýza</p>
+      <p class="offer-desc">Prehľady, reporty, hľadanie nezrovnalostí. Pozerám sa na čísla z viacerých uhlov – kým niečo nesedí, nechám to tak.</p>
+    </div>
+  </div>
+
+  <div class="offer-usp">
+    <p class="offer-usp-quote">„Človek, ktorý si veci všimne – aj tie, ktoré si všimnúť nemali."</p>
+    <div class="offer-usp-tags">
+      <p class="offer-usp-tag">Precíznosť & dôkladnosť</p>
+      <p class="offer-usp-tag">Aktívna slovenčina v ČR</p>
+      <p class="offer-usp-tag">Flexibilná spolupráca</p>
+      <p class="offer-usp-tag">Medzinárodné prostredie</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKÚSENOSTI -->
+<section class="skills" id="skusenosti">
+  <p class="section-label">Skúsenosti</p>
+  <h2 class="section-title">Kde som bola<br>a čo viem</h2>
+
+  <div class="skills-grid">
+    <div>
+      <p class="skills-col-title">Pracovné skúsenosti</p>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <p class="exp-role">Revenue Accountant</p>
+          <p class="exp-period">2023 – 2024</p>
+        </div>
+        <p class="exp-company">IDC CEMA · Praha</p>
+        <p class="exp-desc">Reconciliácia výnosov, mesačný reporting, variance analýza, audit podpora.</p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <p class="exp-role">Intercompany Accountant</p>
+          <p class="exp-period">2019 – 2023</p>
+        </div>
+        <p class="exp-company">IDC CEMA · Praha</p>
+        <p class="exp-desc">Intercompany fakturácia, AR/AP reconciliácie naprieč viacerými entitami, period-end close.</p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <p class="exp-role">Junior Accountant</p>
+          <p class="exp-period">2018 – 2019</p>
+        </div>
+        <p class="exp-company">Edenred · Praha</p>
+        <p class="exp-desc">Fakturácia, bankové reconciliácie, month-end close.</p>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <p class="exp-role">Product Admin</p>
+          <p class="exp-period">2025 – súčasnosť</p>
+        </div>
+        <p class="exp-company">Košík.cz · Praha</p>
+        <p class="exp-desc">Správa produktových dát, administratíva. Stále sa učím – čo je na tom to najlepšie.</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="skills-col-title">Zručnosti & nástroje</p>
+
+      <p class="skill-category">Účtovné systémy</p>
+      <div class="skill-list">
+        <span class="skill-tag">Microsoft Dynamics 365</span>
+        <span class="skill-tag">Pohoda</span>
+      </div>
+
+      <p class="skill-category">Nástroje</p>
+      <div class="skill-list">
+        <span class="skill-tag">Excel (pivot, VLOOKUP)</span>
+        <span class="skill-tag">Notion</span>
+        <span class="skill-tag">Word</span>
+        <span class="skill-tag">Outlook</span>
+      </div>
+
+      <p class="skill-category">Rozvíjajúce sa</p>
+      <div class="skill-list">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">AI nástroje</span>
+        <span class="skill-tag">SQL (čoskoro 😄)</span>
+      </div>
+
+      <p class="skill-category">Vzdelanie</p>
+      <div class="skill-list">
+        <span class="skill-tag">Google AI Essentials</span>
+        <span class="skill-tag">Czechitas HTML/CSS</span>
+        <span class="skill-tag">Czechitas SQL 1, 2</span>
+        <span class="skill-tag">Business Analytics (prebieha)</span>
+        <span class="skill-tag">Účtovníctvo 170h</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="contact" id="kontakt">
+  <p class="section-label">Kontakt</p>
+  <h2 class="section-title">Ozvite sa</h2>
+  <p class="contact-sub">
+    Hľadám čiastočný úväzok alebo spoluprácu na DPČ / DPP / OSVČ v oblasti účtovníctva, 
+    reportingu alebo administratívy. Hybrid alebo remote, Praha a okolie.
+  </p>
+  <div class="contact-links">
+    <a href="mailto:michaela.peschlova@gmail.com" class="contact-link primary">
+      michaela.peschlova@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/michaela-peschlová-7414b7190" class="contact-link" target="_blank">
+      LinkedIn
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-name">Michaela Peschlová</p>
+  <p class="footer-note">Praha · 2025</p>
+</footer>
+
+</body>
+</html>
